@@ -1,0 +1,5 @@
+include ':component'
+include ':base'
+include ':util'
+include ':app'
+rootProject.name = "Deposit-Protect"
