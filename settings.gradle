@@ -1,3 +1,4 @@
+include ':remote'
 include ':component'
 include ':base'
 include ':util'
