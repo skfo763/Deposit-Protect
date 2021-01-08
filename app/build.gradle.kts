@@ -2,6 +2,7 @@ import com.skfo763.gradle.lib.*
 
 plugins {
     `android-application`
+    `load-properties-app`
     `signing-config`
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")

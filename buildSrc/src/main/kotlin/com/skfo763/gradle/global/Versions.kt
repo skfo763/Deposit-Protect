@@ -26,8 +26,8 @@ object Versions {
     const val navVersion = "2.3.0"
 
     const val firebaseAds = "19.4.0"
-    const val firebaseBom = "25.12.0"
-    const val crashlytics = "17.2.2"
+    const val firebaseBom = "26.2.0"
+    const val crashlytics = "17.3.0"
     const val analytics = "17.6.0"
     const val realtimeDB = "19.4.0"
 

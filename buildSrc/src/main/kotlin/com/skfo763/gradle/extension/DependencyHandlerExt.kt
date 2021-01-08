@@ -7,6 +7,10 @@ fun DependencyHandler.implementation(dependencyNotation: String) {
     add("implementation", dependencyNotation)
 }
 
+fun DependencyHandler.implementation(dependencyNotation: Dependency) {
+    add("implementation", dependencyNotation)
+}
+
 fun DependencyHandler.kapt(name: String) {
     add("kapt", name)
 }
