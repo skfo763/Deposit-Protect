@@ -9,7 +9,6 @@ buildscript {
 
     dependencies {
         classpath(com.skfo763.gradle.global.GlobalDependencies.gradle)
-        classpath(com.skfo763.gradle.global.GlobalDependencies.kotlin)
         classpath(com.skfo763.gradle.global.GlobalDependencies.hilt)
         classpath(com.skfo763.gradle.global.GlobalDependencies.googleService)
         classpath(com.skfo763.gradle.global.GlobalDependencies.firebaseCrashlytics)

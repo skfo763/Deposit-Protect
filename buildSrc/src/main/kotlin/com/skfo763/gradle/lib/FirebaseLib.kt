@@ -5,14 +5,16 @@ import com.skfo763.gradle.extension.*
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 
 object FirebaseLib {
-    const val firebaseAds = "com.google.firebase:firebase-ads:${Versions.firebaseAds}"
+    const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
+    const val firebaseBase = "com.google.android.gms:play-services-basement:${Versions.playServiceBasement}"
     const val googleAds = "com.google.android.gms:play-services-ads:${Versions.firebaseAds}"
-    const val analytics = "com.google.firebase:firebase-analytics-ktx:${Versions.analytics}"
-    const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx:${Versions.crashlytics}"
-    const val firebaseBase = "com.google.android.gms:play-services-basement:17.4.0"
+    const val analytics = "com.google.firebase:firebase-analytics-ktx"
+    const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    const val firebaseAds = "com.google.firebase:firebase-ads"
 }
 
 fun DependencyHandlerScope.firebaseDependency() {
+    implementation(platform(FirebaseLib.firebaseBom))
     implementation(FirebaseLib.firebaseAds)
     implementation(FirebaseLib.googleAds)
     implementation(FirebaseLib.crashlytics)
