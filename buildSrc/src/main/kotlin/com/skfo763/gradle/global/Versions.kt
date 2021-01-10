@@ -41,7 +41,8 @@ object Versions {
 }
 
 object TestVersions {
-    const val junit = "4.1.2"
+    const val junit = "4.13"
     const val junitExt = "1.1.2"
     const val espressoCore = "3.3.0"
+    const val runner = "1.2.0"
 }

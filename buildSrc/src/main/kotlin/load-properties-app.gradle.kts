@@ -8,8 +8,12 @@ plugins {
 android {
     defaultConfig {
         val adMobKey = gradleLocalProperties(rootDir).getProperty("admob.app.key")
+        val openApiKey = gradleLocalProperties(rootDir).getProperty("open.api.key")
+        val openApiUrl = gradleLocalProperties(rootDir).getProperty("open.api.url")
         manifestPlaceholders = mapOf("adMobAppKey" to adMobKey)
         buildConfigField("String", "AD_MOB_KEY", "\"$adMobKey\"")
+        buildConfigField("String", "OPEN_API_KEY", "\"$openApiKey\"")
+        buildConfigField("String", "OPEN_API_URL", "\"$openApiUrl\"")
     }
 
     buildTypes {
