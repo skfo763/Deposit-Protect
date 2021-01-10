@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":util"))
     implementation(project(":base"))
     implementation(project(":component"))
+    implementation(project(":remote"))
 
     kotlinDependency()
     rxJavaDependency()
