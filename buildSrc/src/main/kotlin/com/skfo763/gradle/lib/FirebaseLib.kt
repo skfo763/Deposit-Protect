@@ -6,7 +6,7 @@ import org.gradle.kotlin.dsl.DependencyHandlerScope
 
 object FirebaseLib {
     const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
-    const val firebaseBase = "com.google.android.gms:play-services-basement:17.4.0"
+    const val firebaseBase = "com.google.android.gms:play-services-basement:${Versions.playServiceBasement}"
     const val googleAds = "com.google.android.gms:play-services-ads:${Versions.firebaseAds}"
     const val analytics = "com.google.firebase:firebase-analytics-ktx"
     const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"

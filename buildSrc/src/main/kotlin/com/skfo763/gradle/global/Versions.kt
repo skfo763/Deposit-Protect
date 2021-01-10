@@ -27,13 +27,9 @@ object Versions {
 
     const val firebaseAds = "19.4.0"
     const val firebaseBom = "26.2.0"
-    const val crashlytics = "17.3.0"
-    const val analytics = "17.6.0"
-    const val realtimeDB = "19.4.0"
+    const val playServiceBasement = "17.4.0"
 
     const val playCore = "1.8.0"
-    const val playServiceMap = "16.0.0"
-    const val naverMap = "3.10.0"
     const val retrofit = "2.9.0"
     const val moshi = "1.11.0"
     const val stetho = "1.5.1"
@@ -41,7 +37,6 @@ object Versions {
     const val tedPermission = "2.2.3"
     const val webKitVersion = "1.3.0"
     const val simpleRV = "0.7.0"
-    const val youtubePlayer = "1.3.0"
     const val glide = "4.11.0"
 }
 
