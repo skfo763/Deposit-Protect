@@ -19,12 +19,17 @@ android {
     buildTypes {
         getByName("release") {
             val fullAdUnitKey = gradleLocalProperties(rootDir).getProperty("admob.ads.unit.full.release")
+            val nativeAdUnitKey = gradleLocalProperties(rootDir).getProperty("admob.ads.unit.native.release")
             buildConfigField("String", "AD_MOB_UNIT_FULL", "\"$fullAdUnitKey\"")
+            buildConfigField("String", "AD_MOB_UNIT_NATIVE", "\"$nativeAdUnitKey\"")
+
         }
 
         getByName("debug") {
             val fullAdUnitKey = gradleLocalProperties(rootDir).getProperty("admob.ads.unit.full.debug")
+            val nativeAdUnitKey = gradleLocalProperties(rootDir).getProperty("admob.ads.unit.native.debug")
             buildConfigField("String", "AD_MOB_UNIT_FULL", "\"$fullAdUnitKey\"")
+            buildConfigField("String", "AD_MOB_UNIT_NATIVE", "\"$nativeAdUnitKey\"")
         }
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UnderBarInputTextView">
+        <attr name="ub_under_bar_color" format="reference|color" />
+        <attr name="ub_under_bar_highlight_color" format="reference|color"/>
+        <attr name="ub_text" format="reference|string" />
+        <attr name="ub_text_color" format="reference|color" />
+        <attr name="ub_text_highlight_color" format="reference|color"/>
+    </declare-styleable>
+</resources>

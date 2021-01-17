@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "applicationId": "com.skfo763.repository",
+  "variantType": "LIBRARY",
+  "elements": [
+    {
+      "outputType": {
+        "type": "MERGED_MANIFESTS"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 100000,
+        "versionName": "1.0.0",
+        "outputFile": "repository-debug.aar",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "../../library_manifest/debug/AndroidManifest.xml",
+      "properties": {
+        "packageId": "com.skfo763.repository",
+        "split": ""
+      }
+    }
+  ]
+}

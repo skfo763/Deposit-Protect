@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ub_underbar_input_text_default_padding_lr">16dp</dimen>
+    <dimen name="ub_underbar_input_text_default_padding_tb">16dp</dimen>
+</resources>

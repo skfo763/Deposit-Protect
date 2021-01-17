@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.skfo763.depositprotect.main.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:paddingTop="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+        <com.skfo763.component.underbartext.UnderBarInputTextView
+            android:id="@+id/input_bank_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/input_product_info"
+            app:ub_under_bar_color="#DCDCDC"
+            app:ub_under_bar_highlight_color="#6FB7FF"
+            app:ub_text="은행 선택"
+            app:ub_text_color="#C6C6C6"
+            app:ub_text_highlight_color="#676767"
+            onTextInputClicked="@{viewModel.onBankSelectBarClicked}"/>
+
+        <com.skfo763.component.underbartext.UnderBarInputTextView
+            android:id="@+id/input_product_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/input_bank_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:ub_under_bar_color="#DCDCDC"
+            app:ub_under_bar_highlight_color="#6FB7FF"
+            app:ub_text="상품 선택"
+            app:ub_text_color="#C6C6C6"
+            app:ub_text_highlight_color="#676767"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
