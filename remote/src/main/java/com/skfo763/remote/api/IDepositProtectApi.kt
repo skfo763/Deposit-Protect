@@ -13,8 +13,8 @@ import retrofit2.http.Query
 interface IDepositProtectApi {
 
     companion object {
-        const val COMPANY_API_PATH = "/getCompanyList202008"
-        const val PRODUCTION_API_PATH = "/getProductList202008"
+        const val COMPANY_API_PATH = "getCompanyList202008"
+        const val PRODUCTION_API_PATH = "getProductList202008"
     }
 
     @GET(COMPANY_API_PATH)
@@ -22,9 +22,9 @@ interface IDepositProtectApi {
         @Query("numOfRows") count: Int = 10,
         @Query("pageNo") pageNo: Int = 1,
         @Query("resultType") resultType: String = "json",
-        @Query("serviceKey") serviceKey: String = BuildConfig.OPEN_API_KEY,
-        @Query("fnclsNm") companyName: String? = null,
-        @Query("regnNm") bankingZoneName: String? = null
+        @Query("serviceKey", encoded = true) serviceKey: String = BuildConfig.OPEN_API_KEY,
+        @Query("fnclsNm", encoded = true) companyName: String? = null,
+        @Query("regnNm", encoded = true) bankingZoneName: String? = null
     ): Observable<CompanyApiResult<CompanyInfo>>
 
     @GET(PRODUCTION_API_PATH)
@@ -32,10 +32,10 @@ interface IDepositProtectApi {
         @Query("numOfRows") count: Int = 10,
         @Query("pageNo") pageNo: Int = 1,
         @Query("resultType") resultType: String = "json",
-        @Query("serviceKey") serviceKey: String = BuildConfig.OPEN_API_KEY,
-        @Query("fnclsNm") companyName: String? = null,
-        @Query("regnNm") bankingZoneName: String? = null,
-        @Query("prdNm") productName: String? = null
+        @Query("serviceKey", encoded = true) serviceKey: String = BuildConfig.OPEN_API_KEY,
+        @Query("fnclsNm", encoded = true) companyName: String? = null,
+        @Query("regnNm", encoded = true) bankingZoneName: String? = null,
+        @Query("prdNm", encoded = true) productName: String? = null
     ): Observable<ProductApiResult<ProductInfo>>
 
 
