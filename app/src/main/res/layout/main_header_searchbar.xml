@@ -32,7 +32,7 @@
             app:ub_text="은행 선택"
             app:ub_text_color="#C6C6C6"
             app:ub_text_highlight_color="#676767"
-            onTextInputClicked="@{viewModel.onBankSelectBarClicked}"/>
+            onTextInputClicked="@{viewModel.onBankInputClicked}"/>
 
         <com.skfo763.component.underbartext.UnderBarInputTextView
             android:id="@+id/input_product_info"
@@ -46,7 +46,8 @@
             app:ub_under_bar_highlight_color="#6FB7FF"
             app:ub_text="상품 선택"
             app:ub_text_color="#C6C6C6"
-            app:ub_text_highlight_color="#676767"/>
+            app:ub_text_highlight_color="#676767"
+            onTextInputClicked="@{viewModel.onProductInputClicked}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

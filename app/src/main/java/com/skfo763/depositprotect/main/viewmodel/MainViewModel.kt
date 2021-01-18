@@ -17,13 +17,20 @@ class MainViewModel @ViewModelInject constructor(
     val compositeDisposable = CompositeDisposable()
     val navigationViewModel = NavigationViewModel()
 
-
-    val onBankSelectBarClicked: (View) -> Unit = {
+    val onBankInputClicked: (View) -> Unit = {
         val itemList = mutableListOf<MultiSelectDialog.Item>()
-        for(i in 0..100) {
+        for(i in 0..10) {
             itemList.add(getTestableDialogItem())
         }
         useCase.openBankSelectDialog(itemList)
+    }
+
+    val onBackItemClicked: (MultiSelectDialog.Item) -> Unit = {
+
+    }
+
+    val onProductInputClicked: (View) -> Unit = {
+
     }
 
 }

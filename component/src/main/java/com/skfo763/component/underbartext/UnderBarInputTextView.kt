@@ -57,10 +57,11 @@ class UnderBarInputTextView @JvmOverloads constructor(
 
     init {
         setLayout()
-        this.setOnClickListener {
-            Toast.makeText(context, "클릭클릭", Toast.LENGTH_SHORT).show()
+        setOnClickListener{
+            onClickEvent?.invoke(it)
         }
         setOnTouchListener(this)
+
 
         setUnderBar()
         setTextView()
@@ -68,8 +69,6 @@ class UnderBarInputTextView @JvmOverloads constructor(
 
     private fun setLayout() {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        isClickable = true
-        isFocusableInTouchMode = true
     }
 
     private fun setUnderBar() = with(binding.underBar) {
@@ -86,15 +85,13 @@ class UnderBarInputTextView @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 binding.underBar.setBackgroundColor(attributes.ubHColor)
                 binding.underBarInputText.setTextColor(attributes.textHColor)
-                return true
             }
             MotionEvent.ACTION_CANCEL,
             MotionEvent.ACTION_UP -> {
                 binding.underBar.setBackgroundColor(attributes.ubColor)
                 binding.underBarInputText.setTextColor(attributes.textColor)
-                return true
             }
         }
-        return onTouchEvent?.invoke(view, motion) ?: true
+        return onTouchEvent?.invoke(view, motion) ?: false
     }
 }

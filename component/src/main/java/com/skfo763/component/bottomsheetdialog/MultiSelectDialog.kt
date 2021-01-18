@@ -7,14 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.skfo763.base.extension.logException
 import com.skfo763.base.extension.setTextWithVisibility
 import com.skfo763.component.databinding.DialogMultiSelectBinding
 import com.skfo763.component.databinding.HolderMultiSelectItemBinding
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.Subject
+import java.lang.Exception
 
 fun getTestableDialogItem() = MultiSelectDialog.Item(
     "http://www.pressm.kr/news/photo/202101/35837_23309_2236.jpg",
@@ -26,15 +34,29 @@ fun getTestableDialogItem() = MultiSelectDialog.Item(
 class MultiSelectDialog : BottomSheetDialogFragment() {
 
     class Builder {
-        private var data: List<Item>? = null
+        private var title: String = ""
+        private var data: List<Item> = listOf()
+        private var onItemClicked: ((BottomSheetDialogFragment, Item) -> Unit)? = null
+
+        fun setTitle(titleText: String): Builder {
+            this.title = titleText
+            return this
+        }
 
         fun setItem(data: List<Item>): Builder {
             this.data = data
             return this
         }
 
+        fun setOnItemClickListener(onItemClicked: ((BottomSheetDialogFragment, Item) -> Unit)): Builder {
+            this.onItemClicked = onItemClicked
+            return this
+        }
+
         fun build() = MultiSelectDialog().apply {
-            setData(data)
+            title = this@Builder.title
+            items = this@Builder.data
+            onItemClick = onItemClicked
         }
     }
 
@@ -48,6 +70,10 @@ class MultiSelectDialog : BottomSheetDialogFragment() {
     )
 
     private lateinit var binding: DialogMultiSelectBinding
+    private var onItemClick: ((BottomSheetDialogFragment, Item) -> Unit)? = null
+    private var title: String = ""
+    private var items = listOf<Item>()
+    private val itemAdapter = Adapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,21 +86,36 @@ class MultiSelectDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.dialogContents.apply {
-            adapter = Adapter()
+            adapter = itemAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
         }
+        itemAdapter.itemClickSubject.toFlowable(BackpressureStrategy.BUFFER)
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+               onItemClick?.invoke(this, it)
+            }) {
+                logException(Exception(it))
+            }
+        initDialogComponent()
+        setData(items)
     }
 
-    private fun setData(data: List<Item>?) = data?.let {
+    private fun initDialogComponent() {
+        binding.dialogDismiss.setOnClickListener {
+            dismiss()
+        }
+        binding.dialogTitle.text = title
+    }
+
+    private fun setData(data: List<Item>) = data.let {
         (binding.dialogContents.adapter as? Adapter)?.setItem(it)
         binding.dialogContents.isVisible = true
-    } ?: run {
-        binding.dialogContents.isVisible = false
     }
 
     private class Adapter: RecyclerView.Adapter<ItemHolder>() {
 
         private val _itemList = mutableListOf<Item>()
+        val itemClickSubject: Subject<Item> = BehaviorSubject.create()
 
         fun setItem(data: List<Item>) {
             _itemList.clear()
@@ -85,7 +126,11 @@ class MultiSelectDialog : BottomSheetDialogFragment() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
             return ItemHolder(
                 HolderMultiSelectItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
+            ).apply {
+                itemView.setOnClickListener {
+                    itemClickSubject.onNext(_itemList[adapterPosition])
+                }
+            }
         }
 
         override fun getItemCount() = _itemList.size

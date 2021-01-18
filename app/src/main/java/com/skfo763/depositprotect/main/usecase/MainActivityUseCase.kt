@@ -9,8 +9,12 @@ class MainActivityUseCase(private val activity: MainActivity): BaseActivityUseCa
 
     fun openBankSelectDialog(itemList: List<MultiSelectDialog.Item>) {
         MultiSelectDialog.Builder()
+            .setTitle("은행을 선택하세요.")
             .setItem(itemList)
-            .build()
+            .setOnItemClickListener { dialog, item ->
+                dialog.dismiss()
+                activity.viewModel.onBackItemClicked(item)
+            }.build()
             .show(activity.supportFragmentManager, null)
     }
 
