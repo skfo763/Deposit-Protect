@@ -15,57 +15,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".main.activity.MainActivity">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/main_appbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF">
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/main_coordinator"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#EDEDED"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/banner_template"
+                tools:context=".main.activity.MainActivity">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/main_appbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:scrimAnimationDuration="200"
-                    app:contentScrim="#FFFFFF">
+                    android:background="#EDEDED">
 
-                    <include
-                        android:id="@+id/main_search_bar"
-                        bind:viewModel="@{viewModel}"
-                        layout="@layout/main_header_searchbar" />
-                    
-                    <include
-                        android:id="@+id/main_toolbar"
-                        layout="@layout/main_header_toolbar" />
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                        app:scrimAnimationDuration="200"
+                        app:contentScrim="#EDEDED">
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                        <include
+                            android:id="@+id/main_search_bar"
+                            bind:viewModel="@{viewModel}"
+                            layout="@layout/main_header_searchbar" />
 
-            </com.google.android.material.appbar.AppBarLayout>
+                        <include
+                            android:id="@+id/main_toolbar"
+                            layout="@layout/main_header_toolbar" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/main_nav_host"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="fill_vertical"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/main_navigation"
-                app:layout_anchor="@id/main_appbar"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/main_nav_host"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="fill_vertical"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/main_navigation"
+                    app:layout_anchor="@id/main_appbar"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/banner_template"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                app:layout_constraintTop_toBottomOf="@id/main_coordinator"
                 app:gnt_template_type="@layout/gnt_small_template_view"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/main_navigation_view"
@@ -76,7 +89,5 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
-
-
 
 </layout>

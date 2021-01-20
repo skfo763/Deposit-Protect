@@ -94,7 +94,7 @@ class MultiSelectDialog : BottomSheetDialogFragment() {
             .subscribe({
                onItemClick?.invoke(this, it)
             }) {
-                logException(Exception(it))
+                logException(it)
             }
         initDialogComponent()
         setData(items)

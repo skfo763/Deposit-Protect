@@ -13,42 +13,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
-        android:paddingTop="4dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:paddingBottom="16dp">
 
-        <com.skfo763.component.underbartext.UnderBarInputTextView
-            android:id="@+id/input_bank_info"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:id="@+id/layout_bank_info"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/input_product_info"
-            app:ub_under_bar_color="#DCDCDC"
-            app:ub_under_bar_highlight_color="#6FB7FF"
-            app:ub_text="@string/bank_input_text_hint"
-            app:ub_text_color="#C6C6C6"
-            app:ub_text_highlight_color="#676767"
-            highlightText="@{viewModel.bankInputText}"
-            onTextInputClicked="@{viewModel.onBankInputClicked}"/>
+            app:layout_constraintBottom_toTopOf="@id/layout_product_info">
 
-        <com.skfo763.component.underbartext.UnderBarInputTextView
-            android:id="@+id/input_product_info"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_bank_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:includeFontPadding="true"
+                android:hint="@string/bank_input_text_hint"
+                android:textColorHint="#C6C6C6"
+                android:imeOptions="actionSearch"
+                android:text="@{viewModel.bankInputText}"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:backgroundTint="#AEAEAE"
+                android:onClick="@{(v) -> viewModel.onBankInputClicked.invoke(v)}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_product_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/input_bank_info"
+            app:layout_constraintTop_toBottomOf="@id/layout_bank_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:ub_under_bar_color="#DCDCDC"
-            app:ub_under_bar_highlight_color="#6FB7FF"
-            app:ub_text="@string/product_input_text_hint"
-            app:ub_text_color="#C6C6C6"
-            app:ub_text_highlight_color="#676767"
-            onTextInputClicked="@{viewModel.onProductInputClicked}"/>
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_product_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:includeFontPadding="true"
+                android:hint="@string/product_input_text_hint"
+                android:textColorHint="#C6C6C6"
+                android:textColor="#323232"
+                android:imeOptions="actionSearch"
+                android:text="@={viewModel.productEditText}"
+                android:backgroundTint="#AEAEAE"
+                completeKeyListener="@{viewModel.onProductEditTextKeyDown}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

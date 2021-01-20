@@ -23,6 +23,10 @@ fun Any.logError(message: String?) {
     }
 }
 
+fun Any.logException(t: Throwable, logType: LogType = LogType.CRITICAL) {
+    logException(Exception(t), logType)
+}
+
 fun Any.logException(e: Exception, logType: LogType = LogType.CRITICAL) {
     when(logType) {
         LogType.CRITICAL -> if(BuildConfig.DEBUG) {
