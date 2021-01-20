@@ -2,7 +2,6 @@ package com.skfo763.depositprotect.main.usecase
 
 import com.skfo763.base.BaseActivityUseCase
 import com.skfo763.component.bottomsheetdialog.MultiSelectDialog
-import com.skfo763.component.bottomsheetdialog.getTestableDialogItem
 import com.skfo763.depositprotect.main.activity.MainActivity
 
 class MainActivityUseCase(private val activity: MainActivity): BaseActivityUseCase(activity) {
@@ -13,7 +12,7 @@ class MainActivityUseCase(private val activity: MainActivity): BaseActivityUseCa
             .setItem(itemList)
             .setOnItemClickListener { dialog, item ->
                 dialog.dismiss()
-                activity.viewModel.onBackItemClicked(item)
+                activity.viewModel.onBankItemClicked(item)
             }.build()
             .show(activity.supportFragmentManager, null)
     }

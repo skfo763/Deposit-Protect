@@ -52,6 +52,7 @@ class UnderBarInputTextView @JvmOverloads constructor(
     var text: String = attributes.text
         set(value) {
             binding.underBarInputText.text = value
+            binding.underBarInputText.setTextColor(attributes.textHColor)
             field = value
         }
 
