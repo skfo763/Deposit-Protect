@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.skfo763.repository.data.Product" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_product_item"
+        android:layout_margin="4dp"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/company_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_name_title"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/company_name"
+            app:layout_constraintEnd_toStartOf="@+id/company_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/company_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:textSize="13sp"
+            android:layout_marginBottom="4dp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="@{item.companyName}"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/product_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/company_name_title"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="(주)DH저축은행" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_name_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_assignment_24"
+            app:layout_constraintEnd_toStartOf="@+id/product_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/product_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#323232"
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="@{item.productName}"
+            app:layout_constraintBottom_toTopOf="@+id/register_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/product_name_icon"
+            app:layout_constraintTop_toBottomOf="@+id/company_name"
+            tools:text="정기예금단리식, 정기예금복리식\n정기예금단리식(비대면), 정기예금복리식(비대면)" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/register_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_date"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/register_date"
+            app:layout_constraintEnd_toStartOf="@+id/register_date"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/register_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/register_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            tools:text="20210118"
+            android:textSize="13sp"
+            android:layout_marginTop="8dp"
+            android:text="@{item.registerDate}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/register_date_title"
+            app:layout_constraintTop_toBottomOf="@+id/product_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

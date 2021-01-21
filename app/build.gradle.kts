@@ -7,6 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("kotlin-android")
 }
 
 android {
@@ -46,6 +47,10 @@ dependencies {
     implementation(project(":base"))
     implementation(project(":component"))
     implementation(project(":remote"))
+    implementation(project(":nativetemplates"))
+    implementation(project(":repository"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     kotlinDependency()
     rxJavaDependency()

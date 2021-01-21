@@ -14,8 +14,9 @@ android {
 }
 
 dependencies {
+    implementation(UiLib.appCompat)
+
     kotlinDependency()
     navigationDependency()
     firebaseDependency()
-    implementation(UiLib.appCompat)
 }

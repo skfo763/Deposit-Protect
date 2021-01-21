@@ -1,3 +1,5 @@
+include ':nativetemplates'
+include ':repository'
 include ':remote'
 include ':component'
 include ':base'
