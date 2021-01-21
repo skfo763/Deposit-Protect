@@ -27,7 +27,7 @@ class MainViewModel @ViewModelInject constructor(
 ): BaseViewModel<MainActivityUseCase>() {
 
     val compositeDisposable = CompositeDisposable()
-    val navigationViewModel = NavigationViewModel()
+    val navigationViewModel by lazy { NavigationViewModel(useCase) }
 
     private val _bankInputText = MutableLiveData("")
     private val _productList = MutableLiveData<List<Product>>()
