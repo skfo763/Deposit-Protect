@@ -28,7 +28,7 @@
                 android:paddingBottom="20dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView"
+                    android:id="@+id/main_nav_title_icon"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_marginStart="16dp"
@@ -36,69 +36,128 @@
                     android:src="@mipmap/ic_launcher_round"
                     android:layout_marginBottom="20dp"
                     app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintBottom_toTopOf="@+id/view"
-                    app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
+                    app:layout_constraintBottom_toTopOf="@+id/navigation_first_divider"
+                    app:layout_constraintEnd_toStartOf="@+id/main_nav_title"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView"
+                    android:id="@+id/main_nav_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/main_nav_title_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+                    app:layout_constraintStart_toEndOf="@+id/main_nav_title_icon"
+                    app:layout_constraintTop_toTopOf="@+id/main_nav_title_icon" />
 
                 <View
-                    android:id="@+id/view"
+                    android:id="@+id/navigation_first_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#DCDCDC"
-                    app:layout_constraintBottom_toTopOf="@+id/naviDrawerMenuView"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
-                    tools:layout_editor_absoluteX="-16dp" />
+                    android:background="#D6D6D6"
+                    app:layout_constraintBottom_toTopOf="@+id/common_menu_title"
+                    app:layout_constraintTop_toBottomOf="@+id/main_nav_title_icon" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/common_menu_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/navi_common_setting"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/navigation_first_divider"
+                    app:layout_constraintBottom_toTopOf="@id/menu_app_version" />
 
                 <com.skfo763.component.navigationmenu.NaviDrawerMenuView
-                    android:id="@+id/naviDrawerMenuView"
+                    android:id="@+id/menu_app_version"
                     setOnMenuClickListener="@{viewModel.appVersionInfoClicked}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/naviDrawerMenuView2"
-                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    app:layout_constraintBottom_toTopOf="@+id/common_menu_title"
+                    app:layout_constraintTop_toBottomOf="@+id/navigation_first_divider"
                     app:menu_title="버전 정보"
                     app:menu_title_icon="@drawable/ic_baseline_format_list_numbered_24"
                     menu_value="@{viewModel.versionName}"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_height="44dp" />
+                    tools:layout_editor_absoluteX="0dp" />
 
                 <com.skfo763.component.navigationmenu.NaviDrawerMenuView
-                    android:id="@+id/naviDrawerMenuView2"
+                    android:id="@+id/menu_app_detail"
                     setOnMenuClickListener="@{viewModel.appDetailInfoClicked}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/naviDrawerMenuView3"
-                    app:layout_constraintTop_toBottomOf="@+id/naviDrawerMenuView"
+                    app:layout_constraintBottom_toTopOf="@+id/menu_share"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_app_version"
                     app:menu_title="앱 상세정보"
                     app:menu_title_icon="@drawable/ic_baseline_rate_review_24"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_height="44dp" />
+                    tools:layout_editor_absoluteX="0dp" />
 
                 <com.skfo763.component.navigationmenu.NaviDrawerMenuView
-                    android:id="@+id/naviDrawerMenuView3"
+                    android:id="@+id/menu_share"
                     setOnMenuClickListener="@{viewModel.appShareButtonClicked}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/naviDrawerMenuView2"
+                    app:layout_constraintBottom_toTopOf="@id/menu_app_theme"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_app_detail"
                     app:menu_title="친구와 앱 공유하기"
                     app:menu_title_icon="@drawable/ic_baseline_share_24"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_height="44dp" />
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <com.skfo763.component.navigationmenu.NaviDrawerMenuView
+                    android:id="@+id/menu_app_theme"
+                    setOnMenuClickListener="@{viewModel.appThemeClicked}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu_title="앱 테마"
+                    currentUiTheme="@{viewModel.currentUiTheme}"
+                    app:menu_title_icon="@drawable/ic_baseline_color_lens_24"
+                    app:layout_constraintTop_toBottomOf="@id/menu_share"
+                    app:layout_constraintBottom_toTopOf="@id/navigation_second_divider"/>
+
+                <View
+                    android:id="@+id/navigation_second_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#D6D6D6"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_app_theme"
+                    app:layout_constraintBottom_toTopOf="@+id/other_info_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/other_info_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/navi_other_info"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/navigation_second_divider"
+                    app:layout_constraintBottom_toTopOf="@id/menu_opensource_license" />
+
+                <com.skfo763.component.navigationmenu.NaviDrawerMenuView
+                    android:id="@+id/menu_opensource_license"
+                    setOnMenuClickListener="@{viewModel.openSourceLicenseClicked}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu_title="오픈소스 라이센스"
+                    app:menu_title_icon="@drawable/ic_baseline_code_24"
+                    app:layout_constraintTop_toBottomOf="@id/other_info_title"
+                    app:layout_constraintBottom_toTopOf="@id/menu_data_provider"/>
+
+                <com.skfo763.component.navigationmenu.NaviDrawerMenuView
+                    android:id="@+id/menu_data_provider"
+                    setOnMenuClickListener="@{viewModel.dataProviderClicked}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu_title="데이터 제공자"
+                    app:menu_title_icon="@drawable/ic_baseline_folder_shared_24"
+                    app:layout_constraintTop_toBottomOf="@id/menu_opensource_license"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
