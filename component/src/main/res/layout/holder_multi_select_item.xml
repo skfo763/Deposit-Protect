@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:layout_margin="4dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:layout_margin="8dp"
     android:background="@drawable/bg_item_multi_select"
     android:foreground="?attr/selectableItemBackground">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/item_multi_select_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@drawable/ic_baseline_android_24"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@+id/item_multi_select_title"

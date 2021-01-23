@@ -7,4 +7,11 @@
         <attr name="ub_text_color" format="reference|color" />
         <attr name="ub_text_highlight_color" format="reference|color"/>
     </declare-styleable>
+
+    <declare-styleable name="NaviDrawerMenuView">
+        <attr name="menu_title" format="reference|string"/>
+        <attr name="menu_title_icon" format="reference"/>
+        <attr name="menu_value" format="string"/>
+        <attr name="menu_value_icon" format="reference"/>
+    </declare-styleable>
 </resources>

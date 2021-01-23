@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:padding="16dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/navigation_title_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_title"
+        app:layout_constraintEnd_toStartOf="@id/navigation_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/navigation_title"
+        tools:src="@drawable/ic_baseline_android_24" />
+
+    <TextView
+        android:id="@+id/navigation_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginStart="8dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/navigation_value_icon"
+        app:layout_constraintStart_toEndOf="@+id/navigation_title_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="앱 버전" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/navigation_value_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_value"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/navigation_value"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@+id/navigation_value"
+        tools:src="@drawable/ic_baseline_clear_24"
+        tools:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/navigation_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#838383"
+        android:textSize="12sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/navigation_value_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="1.0.0" />
+
+</merge>

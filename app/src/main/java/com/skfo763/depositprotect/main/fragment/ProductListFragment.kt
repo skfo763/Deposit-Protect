@@ -21,6 +21,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, MainViewMod
 
     override val bindingVariable: (FragmentProductListBinding) -> Unit = {
         it.parentViewModel = parentViewModel
+        it.onFloatingButtonClickListener = floatingButtonClickListener
         it.productListList.layoutManager = LinearLayoutManager(context)
     }
 
@@ -29,6 +30,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, MainViewMod
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         parentViewModel.setProductList()
+    }
+
+    private val floatingButtonClickListener = View.OnClickListener {
+        binding.productListList.smoothScrollToPosition(0)
     }
 
 }

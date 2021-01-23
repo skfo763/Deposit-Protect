@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     
     <data>
         <variable
             name="parentViewModel"
             type="com.skfo763.depositprotect.main.viewmodel.MainViewModel" />
+        <variable
+            name="onFloatingButtonClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,12 +18,33 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             bind:dino_items="@{parentViewModel.productList}"
             bind:dino_itemLayout="@{@layout/holder_product_item}"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/go_to_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:theme="@style/AppTheme"
+            android:backgroundTint="#70B8FF"
+            android:elevation="1dp"
+            android:text="@string/scroll_to_top"
+            android:onClick="@{onFloatingButtonClickListener}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:icon="@drawable/ic_baseline_upgrade_24"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
