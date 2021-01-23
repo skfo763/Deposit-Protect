@@ -24,9 +24,9 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
 import java.lang.Exception
 
-fun getTestableDialogItem() = MultiSelectDialog.Item(
-    "http://www.pressm.kr/news/photo/202101/35837_23309_2236.jpg",
-    "우리은행",
+fun getFlatWhiteDialogItem(title: String, iconImageUrl: String) = MultiSelectDialog.Item(
+    iconImageUrl,
+    title,
     bgColor = Color.parseColor("#FFFFFF"),
     titleColor = Color.parseColor("#323232")
 )

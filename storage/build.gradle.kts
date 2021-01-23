@@ -10,10 +10,10 @@ plugins {
 dependencies {
     implementation(project(":util"))
     implementation(project(":base"))
-    implementation(project(":remote"))
-    implementation(project(":storage"))
 
     kotlinDependency()
     rxJavaDependency()
     daggerHiltDependency()
+    dataStoreDependency()
+    roomDependency()
 }

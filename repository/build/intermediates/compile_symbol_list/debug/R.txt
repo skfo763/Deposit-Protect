@@ -1393,6 +1393,7 @@ int layout select_dialog_item_material 0x0
 int layout select_dialog_multichoice_material 0x0
 int layout select_dialog_singlechoice_material 0x0
 int layout support_simple_spinner_dropdown_item 0x0
+int string PORT_NUMBER 0x0
 int string abc_action_bar_home_description 0x0
 int string abc_action_bar_home_description_format 0x0
 int string abc_action_bar_home_subtitle_description_format 0x0
@@ -1434,6 +1435,7 @@ int string abc_searchview_description_voice 0x0
 int string abc_shareactionprovider_share_with 0x0
 int string abc_shareactionprovider_share_with_application 0x0
 int string abc_toolbar_collapse_description 0x0
+int string app_name 0x0
 int string appbar_scrolling_view_behavior 0x0
 int string bottom_sheet_behavior 0x0
 int string character_counter_content_description 0x0
