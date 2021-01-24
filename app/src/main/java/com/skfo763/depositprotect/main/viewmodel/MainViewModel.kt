@@ -8,8 +8,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.skfo763.base.BaseViewModel
+import com.skfo763.base.extension.bindToLiveData
 import com.skfo763.base.extension.logException
 import com.skfo763.base.extension.plusAssign
+import com.skfo763.base.theme.ThemeType
 import com.skfo763.component.bottomsheetdialog.MultiSelectDialog
 import com.skfo763.component.bottomsheetdialog.getFlatWhiteDialogItem
 import com.skfo763.depositprotect.main.usecase.MainActivityUseCase
@@ -27,14 +29,17 @@ class MainViewModel @ViewModelInject constructor(
 ): BaseViewModel<MainActivityUseCase>() {
 
     val compositeDisposable = CompositeDisposable()
-    val navigationViewModel by lazy { NavigationViewModel(useCase, repository) }
 
     private val _bankInputText = MutableLiveData("")
     private val _productList = MutableLiveData<List<Product>>()
+    private val _currentUiTheme = MutableLiveData(ThemeType.DEFAULT_MODE)
 
     val bankInputText: LiveData<String> = _bankInputText
     val productEditText = MutableLiveData("")
     val productList: LiveData<List<Product>> = _productList
+    val currentUiTheme: LiveData<ThemeType> = _currentUiTheme
+
+    val navigationViewModel by lazy { NavigationViewModel(compositeDisposable, useCase, repository, _currentUiTheme) }
 
     val onBankInputClicked: (View) -> Unit = {
         compositeDisposable += repository.getFamousBankList().map {
@@ -63,13 +68,17 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun setProductList() {
-        compositeDisposable += repository.getProductFromBankName()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _productList.value = it
-            }) {
-                logException(it)
-            }
+        compositeDisposable += repository.getProductFromBankName().bindToLiveData(_productList)
+    }
+
+    fun initializeNaviDrawer() = navigationViewModel.apply {
+        getAppBaseInfo()
+        getDataProviderInfo()
+        getOpenSourceLicense()
+    }
+
+    fun saveThemeState(themeType: ThemeType) {
+        compositeDisposable += repository.setThemeState(themeType).bindToLiveData(_currentUiTheme)
     }
 
 }
