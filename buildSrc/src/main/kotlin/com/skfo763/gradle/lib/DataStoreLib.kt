@@ -6,7 +6,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object DataStoreLib {
     const val prefDataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
-    const val protoDataStore = "androidx.datastore:datastore-core:${Versions.dataStore}"
+    const val rxDataStoreWrapper = "androidx.datastore:datastore-preferences-rxjava3:${Versions.dataStore}"
 }
 
 object RoomLib {
@@ -18,7 +18,7 @@ object RoomLib {
 
 fun DependencyHandler.dataStoreDependency() {
     implementation(DataStoreLib.prefDataStore)
-    implementation(DataStoreLib.protoDataStore)
+    implementation(com.skfo763.gradle.lib.DataStoreLib.rxDataStoreWrapper)
 }
 
 fun DependencyHandler.roomDependency() {

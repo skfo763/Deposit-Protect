@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.skfo763.base.theme.ThemeType
 import com.skfo763.depositprotect.BuildConfig
 import com.skfo763.depositprotect.main.usecase.MainActivityUseCase
+import com.skfo763.repository.IMainRepository
 
-class NavigationViewModel (
-    useCase: MainActivityUseCase
+class NavigationViewModel(
+    useCase: MainActivityUseCase,
+    repository: IMainRepository
 ) {
 
     private val _versionName = MutableLiveData(BuildConfig.VERSION_NAME)
@@ -17,15 +19,21 @@ class NavigationViewModel (
     val currentUiTheme: LiveData<ThemeType> = _currentUiTheme
 
     val appVersionInfoClicked: (String?) -> Unit = { menuValue ->
-        useCase.snackBar("앱 버전")
+
+
+
     }
 
     val appDetailInfoClicked: (String?) -> Unit = { menuValue ->
-        useCase.snackBar("스토어 페이지")
+
+
+
     }
 
     val appShareButtonClicked: (String?) -> Unit = { menuValue ->
-        useCase.snackBar("앱 공유")
+
+
+
     }
 
     val appThemeClicked: (String?) -> Unit = {

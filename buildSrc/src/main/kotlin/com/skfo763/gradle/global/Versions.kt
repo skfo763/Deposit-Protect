@@ -19,7 +19,7 @@ object Versions {
     const val rxAndroid = "3.0.0"
     const val lifeCycleExt = "2.2.0"
 
-    const val dataStore = "1.0.0-alpha01"
+    const val dataStore = "1.0.0-alpha06"
     const val roomVersion = "2.2.5"
     const val roomDebug = "1.0.6"
     const val material = "1.2.1"

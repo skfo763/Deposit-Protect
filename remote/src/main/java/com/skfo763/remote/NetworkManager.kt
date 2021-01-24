@@ -16,7 +16,7 @@ class NetworkManager {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    fun getOpenApiRetrofit() = Retrofit.Builder().baseUrl(BuildConfig.OPEN_API_URL)
+    fun getOpenApiRetrofit(): Retrofit = Retrofit.Builder().baseUrl(BuildConfig.OPEN_API_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .client(OkHttpClient.Builder()

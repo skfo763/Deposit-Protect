@@ -8,10 +8,8 @@ data class Product(
     val productName: String
 )
 
-fun getTestableProduct(count: Int) = Product(
-    count,
-    "",
-    "하나은행",
-    "20190104",
-    "든든플러스 적금 ${count+1}"
-)
+fun getTestableProduct(count: Int) = mutableListOf<Product>().apply {
+    for(i in 0..count) {
+        add(Product(i, "", "하나은행", "20190104", "든든플러스 적금 ${i+1}"))
+    }
+}

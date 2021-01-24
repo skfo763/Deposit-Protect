@@ -11,23 +11,23 @@ import com.skfo763.base.BaseViewModel
 import com.skfo763.base.extension.logException
 import com.skfo763.base.extension.plusAssign
 import com.skfo763.component.bottomsheetdialog.MultiSelectDialog
-import com.skfo763.component.bottomsheetdialog.getTestableDialogItem
+import com.skfo763.component.bottomsheetdialog.getFlatWhiteDialogItem
 import com.skfo763.depositprotect.main.usecase.MainActivityUseCase
+import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.data.Product
 import com.skfo763.repository.data.getTestableProduct
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class MainViewModel @ViewModelInject constructor(
+    private val repository: IMainRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ): BaseViewModel<MainActivityUseCase>() {
 
     val compositeDisposable = CompositeDisposable()
-    val navigationViewModel by lazy { NavigationViewModel(useCase) }
+    val navigationViewModel by lazy { NavigationViewModel(useCase, repository) }
 
     private val _bankInputText = MutableLiveData("")
     private val _productList = MutableLiveData<List<Product>>()
@@ -37,11 +37,11 @@ class MainViewModel @ViewModelInject constructor(
     val productList: LiveData<List<Product>> = _productList
 
     val onBankInputClicked: (View) -> Unit = {
-        val itemList = mutableListOf<MultiSelectDialog.Item>()
-        for(i in 0..10) {
-            itemList.add(getTestableDialogItem())
+        compositeDisposable += repository.getFamousBankList().map {
+            it.map { item -> getFlatWhiteDialogItem(item.name, item.iconUrl) }
+        }.observeOn(AndroidSchedulers.mainThread()).subscribe {
+            useCase.openBankSelectDialog(it)
         }
-        useCase.openBankSelectDialog(itemList)
     }
 
     val onBankItemClicked: (MultiSelectDialog.Item) -> Unit = {
@@ -63,13 +63,9 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun setProductList() {
-        compositeDisposable += Single.timer(200L, TimeUnit.MILLISECONDS)
+        compositeDisposable += repository.getProductFromBankName()
             .observeOn(AndroidSchedulers.mainThread())
-            .map {
-                val data = mutableListOf<Product>()
-                for(i in 0..40) { data.add(getTestableProduct(i)) }
-                return@map data
-            }.subscribe({
+            .subscribe({
                 _productList.value = it
             }) {
                 logException(it)

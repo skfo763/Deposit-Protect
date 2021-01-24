@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":base"))
     implementation(project(":component"))
     implementation(project(":remote"))
+    implementation(project(":storage"))
     implementation(project(":nativetemplates"))
     implementation(project(":repository"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
