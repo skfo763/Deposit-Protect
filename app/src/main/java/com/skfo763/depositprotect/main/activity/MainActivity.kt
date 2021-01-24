@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.skfo763.base.BaseActivity
+import com.skfo763.component.tracker.FirebaseTracker
 import com.skfo763.depositprotect.R
 import com.skfo763.depositprotect.admob.AdMobManager
 import com.skfo763.depositprotect.databinding.ActivityMainBinding
@@ -29,6 +30,7 @@ class MainActivity(
     override var useCase: MainActivityUseCase = MainActivityUseCase(this)
     private lateinit var appBarConfiguration: AppBarConfiguration
     @Inject lateinit var adMobManager: AdMobManager
+    @Inject lateinit var firebaseTracker: FirebaseTracker
 
     override val bindingVariable: (ActivityMainBinding) -> Unit = {
         it.viewModel = viewModel
@@ -40,6 +42,7 @@ class MainActivity(
         adMobManager.showNativeAd()
 
         setToolbar()
+        viewModel.initializeNaviDrawer()
     }
 
     override fun connectNavHostToController(host: NavHostFragment) {

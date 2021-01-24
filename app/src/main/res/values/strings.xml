@@ -8,10 +8,19 @@
     <string name="product_input_text_hint">상품 입력</string>
     <string name="company_name_title">회사명</string>
     <string name="register_date">등록일</string>
+    <string name="theme_select_dialog_title">앱 테마 선택</string>
     <string name="theme_system_default">시스템 테마</string>
     <string name="theme_light">밝은 테마</string>
     <string name="theme_dark">어두운 테마</string>
     <string name="navi_other_info">정보</string>
     <string name="navi_common_setting">일반</string>
     <string name="scroll_to_top">맨 위로 올리기</string>
+    <string name="share_app_title">앱 공유하기</string>
+    <string name="share_app_message">앱을 선택해 주세요</string>
+    <string name="is_newest_version">최신 버전입니다.</string>
+    <string name="data_provider_dialog_title">데이터 제공자</string>
+    <string name="data_provider_link">링크로 이동하기</string>
+    <string name="common_cancel">취소</string>
+    <string name="app_update_title">앱 업데이트 안내</string>
+    <string name="app_update_message">최신버전인 %d 버전으로 업데이트가 필요합니다. 업데이트 하시겠습니까?</string>
 </resources>

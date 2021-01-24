@@ -1,6 +1,10 @@
 package com.skfo763.remote
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.skfo763.remote.api.IAppBaseInfoApi
+import com.skfo763.remote.impl.AppBaseInfoApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -12,9 +16,8 @@ import java.util.concurrent.TimeUnit
 
 class NetworkManager {
 
-    private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val firestore = Firebase.firestore
 
     fun getOpenApiRetrofit(): Retrofit = Retrofit.Builder().baseUrl(BuildConfig.OPEN_API_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -33,4 +36,6 @@ class NetworkManager {
             }.build()
         ).build()
 
+
+    fun getAppBaseInfoApi(): IAppBaseInfoApi = AppBaseInfoApi(moshi, firestore)
 }

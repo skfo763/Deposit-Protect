@@ -1,6 +1,7 @@
 package com.skfo763.storage
 
 import android.content.Context
+import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder
@@ -10,6 +11,7 @@ import com.skfo763.base.theme.ThemeType
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+
 
 class AppDataStore(context: Context) {
 
@@ -24,7 +26,9 @@ class AppDataStore(context: Context) {
     }
 
     @ExperimentalCoroutinesApi
-    val updateCurrUiTheme: Single<Preferences> = currUiTheme.updateDataAsync {
-        return@updateDataAsync Single.just(it.toMutablePreferences())
+    fun updateCurrUiTheme(themeType: ThemeType): Single<Preferences> = currUiTheme.updateDataAsync {
+        val mutablePreferences: MutablePreferences = it.toMutablePreferences()
+        mutablePreferences[UI_THEME] = themeType.name
+        return@updateDataAsync Single.just(mutablePreferences)
     }
 }

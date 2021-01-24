@@ -11,6 +11,7 @@ object FirebaseLib {
     const val analytics = "com.google.firebase:firebase-analytics-ktx"
     const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     const val firebaseAds = "com.google.firebase:firebase-ads"
+    const val fireStore = "com.google.firebase:firebase-firestore-ktx"
 }
 
 fun DependencyHandlerScope.firebaseDependency() {
@@ -20,4 +21,5 @@ fun DependencyHandlerScope.firebaseDependency() {
     implementation(FirebaseLib.crashlytics)
     implementation(FirebaseLib.analytics)
     implementation(FirebaseLib.firebaseBase)
+    implementation(com.skfo763.gradle.lib.FirebaseLib.fireStore)
 }

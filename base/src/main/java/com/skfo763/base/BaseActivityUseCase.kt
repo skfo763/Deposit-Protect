@@ -6,8 +6,6 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LifecycleObserver
 
 abstract class BaseActivityUseCase(private val activity: AppCompatActivity): IBaseActivityUseCase {
 
@@ -50,4 +48,6 @@ abstract class BaseActivityUseCase(private val activity: AppCompatActivity): IBa
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         return false
     }
+
+
 }
