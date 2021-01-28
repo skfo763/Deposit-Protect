@@ -25,7 +25,7 @@ interface IDepositProtectApi {
         @Query("serviceKey", encoded = true) serviceKey: String = BuildConfig.OPEN_API_KEY,
         @Query("fnclsNm", encoded = true) companyName: String? = null,
         @Query("regnNm", encoded = true) bankingZoneName: String? = null
-    ): Observable<CompanyApiResult<CompanyInfo>>
+    ): Single<CompanyApiResult<CompanyInfo>>
 
     @GET(PRODUCTION_API_PATH)
     fun getProductList(
@@ -36,7 +36,7 @@ interface IDepositProtectApi {
         @Query("fnclsNm", encoded = true) companyName: String? = null,
         @Query("regnNm", encoded = true) bankingZoneName: String? = null,
         @Query("prdNm", encoded = true) productName: String? = null
-    ): Observable<ProductApiResult<ProductInfo>>
+    ): Single<ProductApiResult<ProductInfo>>
 
 
 }

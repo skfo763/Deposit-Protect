@@ -8,6 +8,12 @@ data class OpenApiResult <T> (
 
     @Json(name = "header") val header: OpenApiHeader,
 
-    @Json(name = "item") val item: List<T>
+    @Json(name = "item") val item: List<T>,
+
+    @Json(name = "numOfRows") val numOfRows: Int,
+
+    @Json(name = "pageNo") val currentPageNo: Int,
+
+    @Json(name = "totalCount") val totalCount: Int
 
 )

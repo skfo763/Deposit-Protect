@@ -1,11 +1,9 @@
 package com.skfo763.depositprotect.di
 
 import android.app.Activity
-import com.skfo763.component.tracker.FirebaseTracker
 import com.skfo763.depositprotect.admob.AdMobManager
 import com.skfo763.remote.NetworkManager
 import com.skfo763.remote.api.IAppBaseInfoApi
-import com.skfo763.remote.impl.AppBaseInfoApi
 import com.skfo763.remote.api.IDepositProtectApi
 import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.MainRepository
@@ -21,7 +19,7 @@ abstract class ActivityModule {
 
     companion object {
         @Provides
-        fun provideDepositProtectOpenApi(manager: NetworkManager): IDepositProtectApi =
+        fun provideDepositProtectPagingSource(manager: NetworkManager): IDepositProtectApi =
             manager.getOpenApiRetrofit().create(IDepositProtectApi::class.java)
 
         @Provides

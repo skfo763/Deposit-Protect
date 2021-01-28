@@ -1,13 +1,20 @@
 package com.skfo763.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.rxjava3.flowable
 import com.skfo763.base.theme.ThemeType
 import com.skfo763.remote.api.IAppBaseInfoApi
-import com.skfo763.remote.impl.AppBaseInfoApi
 import com.skfo763.remote.api.IDepositProtectApi
+import com.skfo763.remote.data.CompanyInfo
 import com.skfo763.remote.data.OpenSourceLicense
 import com.skfo763.repository.data.*
+import com.skfo763.repository.pagingsource.BankInfoPagingSource
+import com.skfo763.repository.pagingsource.ProductPagingSource
 import com.skfo763.storage.AppDataStore
 import dagger.hilt.android.scopes.ActivityScoped
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -33,17 +40,8 @@ class MainRepository @Inject constructor(
         return appBaseInfoApi.openSourceLicense
     }
 
-
-    override fun getFamousBankList(): Observable<List<FamousBank>> {
+    override fun getFamousBankList(): Observable<List<BankData>> {
         return Observable.timer(300, TimeUnit.MILLISECONDS).map { getTestableFamousBank(10) }
-    }
-
-    override fun getBankList(pageNo: Int, count: Int) {
-
-    }
-
-    override fun getProductFromBankName(bankName: String?): Observable<List<Product>> {
-        return Observable.timer(300, TimeUnit.MILLISECONDS).map { getTestableProduct(20) }
     }
 
     @ExperimentalCoroutinesApi
@@ -51,5 +49,15 @@ class MainRepository @Inject constructor(
         return appDataStore.updateCurrUiTheme(themeType).map { return@map themeType  }
     }
 
+    override fun getBankInfoStream(pageSize: Int, bankName: String?) = Pager(
+        PagingConfig(pageSize),
+        null,
+        { return@Pager BankInfoPagingSource(depositProtectApi, BankInfoPagingSource.Query(bankName)) }
+    ).flowable
 
+    override fun getProductInfoStream(pageSize: Int, bankName: String?, productName: String?) = Pager(
+        PagingConfig(pageSize),
+        null,
+        { return@Pager ProductPagingSource(depositProtectApi, ProductPagingSource.Query(bankName, productName)) }
+    ).flowable
 }

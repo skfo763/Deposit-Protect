@@ -7,9 +7,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
+import androidx.paging.rxjava3.cachedIn
 import com.skfo763.base.BaseViewModel
 import com.skfo763.base.extension.bindToLiveData
-import com.skfo763.base.extension.logException
 import com.skfo763.base.extension.plusAssign
 import com.skfo763.base.theme.ThemeType
 import com.skfo763.component.bottomsheetdialog.MultiSelectDialog
@@ -17,11 +18,8 @@ import com.skfo763.component.bottomsheetdialog.getFlatWhiteDialogItem
 import com.skfo763.depositprotect.main.usecase.MainActivityUseCase
 import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.data.Product
-import com.skfo763.repository.data.getTestableProduct
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import java.util.concurrent.TimeUnit
 
 class MainViewModel @ViewModelInject constructor(
     private val repository: IMainRepository,
@@ -43,7 +41,7 @@ class MainViewModel @ViewModelInject constructor(
 
     val onBankInputClicked: (View) -> Unit = {
         compositeDisposable += repository.getFamousBankList().map {
-            it.map { item -> getFlatWhiteDialogItem(item.name, item.iconUrl) }
+            it.map { item -> getFlatWhiteDialogItem(item.name, item.url) }
         }.observeOn(AndroidSchedulers.mainThread()).subscribe {
             useCase.openBankSelectDialog(it)
         }
@@ -67,9 +65,7 @@ class MainViewModel @ViewModelInject constructor(
         useCase.snackBar("$bank, $product")
     }
 
-    fun setProductList() {
-        compositeDisposable += repository.getProductFromBankName().bindToLiveData(_productList)
-    }
+    val productDataStream get() = repository.getProductInfoStream().cachedIn(viewModelScope)
 
     fun initializeNaviDrawer() = navigationViewModel.apply {
         getAppBaseInfo()

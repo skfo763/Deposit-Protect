@@ -63,4 +63,6 @@ dependencies {
     firebaseDependency()
     networkDependency()
     roomDependency()
+    pagingDependency()
+
 }

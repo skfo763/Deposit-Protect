@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = false)
-data class CompanyInfo(
+open class CompanyInfo(
 
     @field:Json(name = "num") val companyId: Int = 0,
 
