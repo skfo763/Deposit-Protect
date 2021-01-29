@@ -3,7 +3,7 @@ name: Build Test
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [master]
     types: [opened, synchronize, reopened, edited, ready_for_review, review_requested]
 
 

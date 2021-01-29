@@ -16,4 +16,5 @@ dependencies {
     kotlinDependency()
     rxJavaDependency()
     daggerHiltDependency()
+    pagingDependency()
 }

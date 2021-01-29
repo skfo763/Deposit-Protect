@@ -13,8 +13,12 @@ object AndroidCoreKtxLib {
 object RxJavaLib {
     const val rxJava = "io.reactivex.rxjava3:rxjava:${Versions.rxJava}"
     const val rxAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid}"
-    const val rxBinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
-    const val rxBindingCore = "com.jakewharton.rxbinding4:rxbinding-core:4.0.0"
+    const val rxBinding = "com.jakewharton.rxbinding4:rxbinding:${Versions.rxBinding}"
+    const val rxBindingCore = "com.jakewharton.rxbinding4:rxbinding-core:${Versions.rxBinding}"
+    const val autoDisposable = "com.uber.autodispose2:autodispose:${Versions.autoDisposable}"
+    const val autoDisposableLifecycle = "com.uber.autodispose2:autodispose-lifecycle:${Versions.autoDisposable}"
+    const val autoDisposableAndroid = "com.uber.autodispose2:autodispose-android:${Versions.autoDisposable}"
+    const val autoDisposableAndLife = "com.uber.autodispose2:autodispose-androidx-lifecycle:${Versions.autoDisposable}"
 }
 
 object KotlinLib {
@@ -29,6 +33,11 @@ object DaggerHiltLib {
     const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltApp}"
     const val hiltCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltApp}"
     const val hiltCommon = "androidx.hilt:hilt-common:${Versions.hiltApp}"
+}
+
+object PagingLib {
+    const val paging = "androidx.paging:paging-runtime:${Versions.paging}"
+    const val pagingRx = "androidx.paging:paging-rxjava3:${Versions.paging}"
 }
 
 fun DependencyHandler.androidCoreKtxDependency() {
@@ -48,6 +57,10 @@ fun DependencyHandler.rxJavaDependency() {
     implementation(RxJavaLib.rxAndroid)
     implementation(RxJavaLib.rxBinding)
     implementation(RxJavaLib.rxBindingCore)
+    implementation(RxJavaLib.autoDisposable)
+    implementation(RxJavaLib.autoDisposableLifecycle)
+    implementation(RxJavaLib.autoDisposableAndroid)
+    implementation(RxJavaLib.autoDisposableAndLife)
 }
 
 fun DependencyHandler.daggerHiltDependency() {
@@ -56,4 +69,9 @@ fun DependencyHandler.daggerHiltDependency() {
     implementation(DaggerHiltLib.hilt)
     implementation(DaggerHiltLib.hiltViewModel)
     implementation(DaggerHiltLib.hiltCommon)
+}
+
+fun DependencyHandler.pagingDependency() {
+    implementation(com.skfo763.gradle.lib.PagingLib.paging)
+    implementation(com.skfo763.gradle.lib.PagingLib.pagingRx)
 }

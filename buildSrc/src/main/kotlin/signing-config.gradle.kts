@@ -11,12 +11,17 @@ android {
     signingConfigs {
         create("release") {
             val keyStoreProperty = Properties()
-            keyStoreProperty.load(FileInputStream(rootProject.file(KeyStore.releaseKeyStoreFile)))
-
-            keyAlias = keyStoreProperty.getProperty(KeyStore.keyAlias)
-            keyPassword = keyStoreProperty.getProperty(KeyStore.keyPassword)
-            storeFile = file(keyStoreProperty.getProperty(KeyStore.storeFile))
-            storePassword = keyStoreProperty.getProperty(KeyStore.storePassword)
+            try {
+                keyStoreProperty.load(FileInputStream(rootProject.file(KeyStore.releaseKeyStoreFile)))
+                keyAlias = keyStoreProperty.getProperty(KeyStore.keyAlias)
+                keyPassword = keyStoreProperty.getProperty(KeyStore.keyPassword)
+                storeFile = file(keyStoreProperty.getProperty(KeyStore.storeFile))
+                storePassword = keyStoreProperty.getProperty(KeyStore.storePassword)
+            } catch (e: Exception) {
+                keyAlias = ""
+                keyPassword = ""
+                storePassword = ""
+            }
         }
     }
 

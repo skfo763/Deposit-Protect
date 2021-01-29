@@ -18,6 +18,9 @@ object Versions {
     const val rxJava = "3.0.7"
     const val rxAndroid = "3.0.0"
     const val lifeCycleExt = "2.2.0"
+    const val paging = "3.0.0-alpha12"
+    const val rxBinding = "4.0.0"
+    const val autoDisposable = "2.0.0"
 
     const val dataStore = "1.0.0-alpha06"
     const val roomVersion = "2.2.5"
