@@ -8,7 +8,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
+import autodispose2.AutoDispose.autoDisposable
+import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider
 import com.skfo763.base.BaseViewModel
 import com.skfo763.base.extension.bindToLiveData
 import com.skfo763.base.extension.plusAssign
@@ -19,6 +22,7 @@ import com.skfo763.depositprotect.main.usecase.MainActivityUseCase
 import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.data.Product
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class MainViewModel @ViewModelInject constructor(
@@ -29,12 +33,12 @@ class MainViewModel @ViewModelInject constructor(
     val compositeDisposable = CompositeDisposable()
 
     private val _bankInputText = MutableLiveData("")
-    private val _productList = MutableLiveData<List<Product>>()
+    private val _productList = MutableLiveData<PagingData<Product>>()
     private val _currentUiTheme = MutableLiveData(ThemeType.DEFAULT_MODE)
 
     val bankInputText: LiveData<String> = _bankInputText
     val productEditText = MutableLiveData("")
-    val productList: LiveData<List<Product>> = _productList
+    val productList: LiveData<PagingData<Product>> = _productList
     val currentUiTheme: LiveData<ThemeType> = _currentUiTheme
 
     val navigationViewModel by lazy { NavigationViewModel(compositeDisposable, useCase, repository, _currentUiTheme) }
@@ -48,24 +52,28 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     val onBankItemClicked: (MultiSelectDialog.Item) -> Unit = {
+        getProductDataStream(it.title)
         _bankInputText.value = it.title
     }
 
     val onProductEditTextKeyDown: (View, Int, KeyEvent?) -> Boolean = lambda@{ _, keyCode, keyEvent ->
         val eventNotNull = keyEvent ?: return@lambda false
         return@lambda if(eventNotNull.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-            getProductListFromText(_bankInputText.value, productEditText.value)
+            getProductDataStream(_bankInputText.value, productEditText.value)
             true
         } else {
             false
         }
     }
 
-    private fun getProductListFromText(bank: String?, product: String?) {
-        useCase.snackBar("$bank, $product")
+    fun getProductDataStream(
+        bankName: String? = null,
+        productName: String? = null
+    ) {
+        compositeDisposable += repository.getProductInfoStream(bankName = bankName, productName = productName)
+            .cachedIn(viewModelScope)
+            .bindToLiveData(_productList)
     }
-
-    val productDataStream get() = repository.getProductInfoStream().cachedIn(viewModelScope)
 
     fun initializeNaviDrawer() = navigationViewModel.apply {
         getAppBaseInfo()

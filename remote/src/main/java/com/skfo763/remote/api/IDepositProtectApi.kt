@@ -23,7 +23,7 @@ interface IDepositProtectApi {
         @Query("pageNo") pageNo: Int = 1,
         @Query("resultType") resultType: String = "json",
         @Query("serviceKey", encoded = true) serviceKey: String = BuildConfig.OPEN_API_KEY,
-        @Query("fnclsNm", encoded = true) companyName: String? = null,
+        @Query("fncIstNm", encoded = true) companyName: String? = null,
         @Query("regnNm", encoded = true) bankingZoneName: String? = null
     ): Single<CompanyApiResult<CompanyInfo>>
 
@@ -33,7 +33,7 @@ interface IDepositProtectApi {
         @Query("pageNo") pageNo: Int = 1,
         @Query("resultType") resultType: String = "json",
         @Query("serviceKey", encoded = true) serviceKey: String = BuildConfig.OPEN_API_KEY,
-        @Query("fnclsNm", encoded = true) companyName: String? = null,
+        @Query("fncIstNm", encoded = true) companyName: String? = null,
         @Query("regnNm", encoded = true) bankingZoneName: String? = null,
         @Query("prdNm", encoded = true) productName: String? = null
     ): Single<ProductApiResult<ProductInfo>>
