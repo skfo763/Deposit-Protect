@@ -4,6 +4,7 @@ import android.app.Activity
 import com.skfo763.depositprotect.admob.AdMobManager
 import com.skfo763.remote.NetworkManager
 import com.skfo763.remote.api.IAppBaseInfoApi
+import com.skfo763.remote.api.IBankInfoApi
 import com.skfo763.remote.api.IDepositProtectApi
 import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.MainRepository
@@ -25,6 +26,10 @@ abstract class ActivityModule {
         @Provides
         fun provideAppBaseInfoApi(manager: NetworkManager): IAppBaseInfoApi =
             manager.getAppBaseInfoApi()
+
+        @Provides
+        fun provideBankInfoApi(manager: NetworkManager): IBankInfoApi =
+            manager.getBankInfoApi()
 
         @Provides
         fun provideAdmobManager(activity: Activity) = AdMobManager(activity)

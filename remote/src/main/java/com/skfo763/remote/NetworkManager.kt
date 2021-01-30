@@ -4,7 +4,9 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.skfo763.remote.api.IAppBaseInfoApi
+import com.skfo763.remote.api.IBankInfoApi
 import com.skfo763.remote.impl.AppBaseInfoApi
+import com.skfo763.remote.impl.BankInfoApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -38,4 +40,6 @@ class NetworkManager {
 
 
     fun getAppBaseInfoApi(): IAppBaseInfoApi = AppBaseInfoApi(moshi, firestore)
+
+    fun getBankInfoApi(): IBankInfoApi = BankInfoApi(moshi, firestore)
 }

@@ -7,9 +7,6 @@
         <variable
             name="parentViewModel"
             type="com.skfo763.depositprotect.main.viewmodel.MainViewModel" />
-        <variable
-            name="onFloatingButtonClickListener"
-            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +35,6 @@
             android:backgroundTint="#70B8FF"
             android:elevation="1dp"
             android:text="@string/scroll_to_top"
-            android:onClick="@{onFloatingButtonClickListener}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -22,6 +22,10 @@ import com.skfo763.repository.data.DataProvider
 
 class MainActivityUseCase(private val activity: MainActivity): BaseActivityUseCase(activity) {
 
+    companion object {
+        const val REQUEST_CODE_BANK_SELECT = 2013
+    }
+
     val themeDialogItems by lazy { listOf(
         ThemeDialogBuilder.Item(activity.getString(R.string.theme_light), ThemeType.LIGHT_MODE),
         ThemeDialogBuilder.Item(activity.getString(R.string.theme_dark), ThemeType.DARK_MODE),
@@ -35,6 +39,13 @@ class MainActivityUseCase(private val activity: MainActivity): BaseActivityUseCa
             .setOnItemClickListener { dialog, item ->
                 dialog.dismiss()
                 activity.viewModel.onBankItemClicked(item)
+            }.onMoreButtonClickListener {
+
+
+
+
+
+
             }.build()
             .show(activity.supportFragmentManager, null)
     }

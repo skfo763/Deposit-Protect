@@ -1,17 +1,23 @@
 package com.skfo763.depositprotect.main.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider
+import com.jakewharton.rxbinding4.view.clicks
 import com.skfo763.base.BaseFragment
+import com.skfo763.base.extension.logException
+import com.skfo763.base.extension.plusAssign
 import com.skfo763.depositprotect.R
 import com.skfo763.depositprotect.databinding.FragmentProductListBinding
 import com.skfo763.depositprotect.main.adapter.ProductAdapter
+import com.skfo763.depositprotect.main.component.FastScrollLayoutManager
+import com.skfo763.depositprotect.main.component.fastScrollTo
 import com.skfo763.depositprotect.main.usecase.MainActivityUseCase
 import com.skfo763.depositprotect.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,9 +31,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, MainViewMod
 
     override val bindingVariable: (FragmentProductListBinding) -> Unit = {
         it.parentViewModel = parentViewModel
-        it.onFloatingButtonClickListener = floatingButtonClickListener
-        it.productListList.layoutManager = LinearLayoutManager(context)
+        it.productListList.layoutManager = FastScrollLayoutManager(requireContext())
         it.productListList.adapter = productAdapter
+
+        observeFloatingButtonClick()
         observeProductLiveData()
     }
 
@@ -38,8 +45,16 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, MainViewMod
         parentViewModel.getProductDataStream()
     }
 
-    private val floatingButtonClickListener = View.OnClickListener {
-        binding.productListList.smoothScrollToPosition(0)
+    @SuppressLint("AutoDispose")
+    private fun observeFloatingButtonClick() {
+        parentViewModel.compositeDisposable += binding.goToTop.clicks()
+            .throttleFirst(400, TimeUnit.MILLISECONDS)
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                binding.productListList.fastScrollTo(0, 4)
+            }) {
+                logException(it)
+            }
     }
 
     private fun observeProductLiveData() = parentViewModel.productList.observe(viewLifecycleOwner, {
