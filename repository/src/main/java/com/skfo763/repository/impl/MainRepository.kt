@@ -1,4 +1,4 @@
-package com.skfo763.repository
+package com.skfo763.repository.impl
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -8,6 +8,7 @@ import com.skfo763.remote.api.IAppBaseInfoApi
 import com.skfo763.remote.api.IBankInfoApi
 import com.skfo763.remote.api.IDepositProtectApi
 import com.skfo763.remote.data.OpenSourceLicense
+import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.data.*
 import com.skfo763.repository.pagingsource.BankInfoPagingSource
 import com.skfo763.repository.pagingsource.ProductPagingSource
@@ -42,12 +43,6 @@ class MainRepository @Inject constructor(
             it.map { item -> BankShortcutIcon(item) }
         }
     }
-
-    override fun getBankPageStream(pageSize: Int, bankType: BankType?, bankName: String?) = Pager(
-        PagingConfig(pageSize),
-        null,
-        { return@Pager BankInfoPagingSource(bankInfoApi, BankInfoPagingSource.Query(bankType, bankName)) }
-    ).flowable
 
     @ExperimentalCoroutinesApi
     override fun setThemeState(themeType: ThemeType): Single<ThemeType> {

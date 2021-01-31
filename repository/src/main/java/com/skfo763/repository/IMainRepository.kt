@@ -21,8 +21,6 @@ interface IMainRepository {
 
     fun getShortcutBankStream(): Single<List<BankShortcutIcon>>
 
-    fun getBankPageStream(pageSize: Int = 24, bankType: BankType?, bankName: String?) : Flowable<PagingData<BankMainData>>
-
     fun setThemeState(themeType: ThemeType): Single<ThemeType>
 
     fun getProductInfoStream(pageSize: Int = 10, bankName: String? = null, productName: String? = null): Flowable<PagingData<Product>>

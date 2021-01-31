@@ -6,8 +6,10 @@ import com.skfo763.remote.NetworkManager
 import com.skfo763.remote.api.IAppBaseInfoApi
 import com.skfo763.remote.api.IBankInfoApi
 import com.skfo763.remote.api.IDepositProtectApi
+import com.skfo763.repository.IBankSelectRepository
 import com.skfo763.repository.IMainRepository
-import com.skfo763.repository.MainRepository
+import com.skfo763.repository.impl.BankSelectRepository
+import com.skfo763.repository.impl.MainRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -38,4 +40,6 @@ abstract class ActivityModule {
     @Binds
     abstract fun bindMainRepository(impl: MainRepository): IMainRepository
 
+    @Binds
+    abstract fun bindBankSelectRepository(impl: BankSelectRepository): IBankSelectRepository
 }
