@@ -3,7 +3,10 @@ package com.skfo763.depositprotect.main.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import com.jakewharton.rxbinding4.view.clicks
 import com.skfo763.base.BaseFragment
 import com.skfo763.base.extension.logException
@@ -29,10 +32,16 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, MainViewMod
 
     @Inject lateinit var productAdapter: ProductAdapter
 
+    private val loadStateListener: (CombinedLoadStates) -> Unit = {
+        binding.progress.isVisible = it.refresh is LoadState.Loading
+        binding.dataLoadError.isVisible = it.refresh is LoadState.Error
+    }
+
     override val bindingVariable: (FragmentProductListBinding) -> Unit = {
         it.parentViewModel = parentViewModel
         it.productListList.layoutManager = FastScrollLayoutManager(requireContext())
         it.productListList.adapter = productAdapter
+        productAdapter.addLoadStateListener(loadStateListener)
 
         observeFloatingButtonClick()
         observeProductLiveData()

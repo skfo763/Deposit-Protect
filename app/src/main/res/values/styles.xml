@@ -7,4 +7,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:forceDarkAllowed">true</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/splash_icon</item>
+    </style>
 </resources>

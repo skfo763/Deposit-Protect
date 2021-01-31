@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#C6C6C6</color>
+    <color name="colorPrimaryDark">#3A3A3A</color>
     <color name="colorAccent">#3680FF</color>
 
     <color name="ad_background_color">#FFFFFF</color>

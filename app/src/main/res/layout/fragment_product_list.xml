@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <data>
         <variable
@@ -13,13 +12,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.viewpager2.widget.ViewPager2
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_list_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="parent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/go_to_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#70B8FF"
+            android:elevation="1dp"
+            android:text="@string/scroll_to_top"
+            android:theme="@style/AppTheme"
+            android:layout_marginBottom="20dp"
+            app:icon="@drawable/ic_baseline_upgrade_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/data_load_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/product_list_load_failed"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

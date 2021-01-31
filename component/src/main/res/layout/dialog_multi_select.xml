@@ -27,6 +27,7 @@
         android:backgroundTint="#70B8FF"
         android:elevation="1dp"
         android:text="@string/search_bank"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/dialog_contents"
         app:layout_constraintEnd_toEndOf="@id/dialog_contents"
         app:layout_constraintBottom_toBottomOf="@id/dialog_contents"
