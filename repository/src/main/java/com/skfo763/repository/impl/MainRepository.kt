@@ -1,30 +1,28 @@
-package com.skfo763.repository
+package com.skfo763.repository.impl
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.skfo763.base.theme.ThemeType
 import com.skfo763.remote.api.IAppBaseInfoApi
+import com.skfo763.remote.api.IBankInfoApi
 import com.skfo763.remote.api.IDepositProtectApi
-import com.skfo763.remote.data.CompanyInfo
 import com.skfo763.remote.data.OpenSourceLicense
+import com.skfo763.repository.IMainRepository
 import com.skfo763.repository.data.*
 import com.skfo763.repository.pagingsource.BankInfoPagingSource
 import com.skfo763.repository.pagingsource.ProductPagingSource
 import com.skfo763.storage.AppDataStore
 import dagger.hilt.android.scopes.ActivityScoped
-import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @ActivityScoped
 class MainRepository @Inject constructor(
     private val depositProtectApi: IDepositProtectApi,
     private val appBaseInfoApi: IAppBaseInfoApi,
+    private val bankInfoApi: IBankInfoApi,
     private val appDataStore: AppDataStore
 ): IMainRepository {
 
@@ -40,20 +38,16 @@ class MainRepository @Inject constructor(
         return appBaseInfoApi.openSourceLicense
     }
 
-    override fun getFamousBankList(): Observable<List<BankData>> {
-        return Observable.timer(300, TimeUnit.MILLISECONDS).map { getTestableFamousBank(10) }
+    override fun getShortcutBankStream(): Single<List<BankShortcutIcon>> {
+        return bankInfoApi.shortcutBankInfo.map {
+            it.map { item -> BankShortcutIcon(item) }
+        }
     }
 
     @ExperimentalCoroutinesApi
     override fun setThemeState(themeType: ThemeType): Single<ThemeType> {
         return appDataStore.updateCurrUiTheme(themeType).map { return@map themeType  }
     }
-
-    override fun getBankInfoStream(pageSize: Int, bankName: String?) = Pager(
-        PagingConfig(pageSize),
-        null,
-        { return@Pager BankInfoPagingSource(depositProtectApi, BankInfoPagingSource.Query(bankName)) }
-    ).flowable
 
     override fun getProductInfoStream(pageSize: Int, bankName: String?, productName: String?) = Pager(
         PagingConfig(pageSize),

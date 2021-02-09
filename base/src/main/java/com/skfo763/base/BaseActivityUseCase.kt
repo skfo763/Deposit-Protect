@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivityUseCase(private val activity: AppCompatActivity): IBaseActivityUseCase {
+open class BaseActivityUseCase(private val activity: AppCompatActivity): IBaseActivityUseCase {
 
     override val res: Resources get() = activity.resources
 

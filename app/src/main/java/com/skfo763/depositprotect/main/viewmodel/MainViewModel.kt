@@ -14,6 +14,7 @@ import autodispose2.AutoDispose.autoDisposable
 import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider
 import com.skfo763.base.BaseViewModel
 import com.skfo763.base.extension.bindToLiveData
+import com.skfo763.base.extension.logException
 import com.skfo763.base.extension.plusAssign
 import com.skfo763.base.theme.ThemeType
 import com.skfo763.component.bottomsheetdialog.MultiSelectDialog
@@ -44,15 +45,17 @@ class MainViewModel @ViewModelInject constructor(
     val navigationViewModel by lazy { NavigationViewModel(compositeDisposable, useCase, repository, _currentUiTheme) }
 
     val onBankInputClicked: (View) -> Unit = {
-        compositeDisposable += repository.getFamousBankList().map {
-            it.map { item -> getFlatWhiteDialogItem(item.name, item.url) }
-        }.observeOn(AndroidSchedulers.mainThread()).subscribe {
+        compositeDisposable += repository.getShortcutBankStream().map {
+            it.map { item -> getFlatWhiteDialogItem(item.bankId, item.name, item.iconUrl) }
+        }.subscribeOn(AndroidSchedulers.mainThread()).subscribe({
             useCase.openBankSelectDialog(it)
+        }) {
+            logException(it)
         }
     }
 
     val onBankItemClicked: (MultiSelectDialog.Item) -> Unit = {
-        getProductDataStream(it.title)
+        getProductDataStream(it.id)
         _bankInputText.value = it.title
     }
 
